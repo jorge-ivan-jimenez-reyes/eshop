@@ -1,10 +1,10 @@
 name: eShopOnWeb Build and Test
 
-# Triggers (uncomment line below to use it)
+# Triggers
 on:
   [push, workflow_dispatch]
 
-# Environment variables https://docs.github.com/en/actions/learn-github-actions/environment-variables
+# Environment variables
 env:
   RESOURCE-GROUP: rg-eshoponweb-george
   LOCATION: eastus
@@ -63,7 +63,7 @@ jobs:
       with:
         name: .net-app
         path: .net-app
-  
+
     # Download the bicep templates from previous job
     - name: Download artifact from build job
       uses: actions/download-artifact@v4
@@ -85,7 +85,7 @@ jobs:
         resourceGroupName: ${{ env.RESOURCE-GROUP }}
         template: bicep-template/webapp.bicep
         parameters: 'webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }}'
-        failOnStdErr: false   
+        failOnStdErr: false 
     
     # Publish website to Azure App Service (WebApp)
     # Step disabled due to issue where the site sometimes can't be found: https://github.com/microsoft/pipelines-appservice-lib/issues/56. Instead deploy using CLI
